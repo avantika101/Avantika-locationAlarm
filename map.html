@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>distance matric,places</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--  <link rel="stylesheet" href="distancecss.css"> ERROR: THE FUCKING FUCKING FUCKING FUCK *_* -->
+  <style>
+  /* Set the size of the div element that contains the map */
+
+  #map {
+    height: 100vh;  /* The height is 400 pixels */
+    width: 100vw;  /* The width is the width of the web page position: fixed;*/
+    background-color: grey;
+    position: fixed;
+   }
+  /* side navigation bar */
+
+    .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  @media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  }
+  </style>
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- api key   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwtOrO6gLnsZBhddmL9-bP4IUg8xuwLmI" type="text/javascript"></script>
+-->
+  <script>
+  var x = document.getElementById("map");
+  function getLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+  }
+
+  function showPosition(position){
+  var mapOptions={
+    zoom:18,
+    center:new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  var map= new google.maps.Map(document.getElementById("map"),mapOptions);
+  var marker= new google.maps.Marker({map:map,position:{lat:position.coords.latitude,lng:position.coords.longitude}});
+  }
+  </script>
+
+  </head>
+
+  <body onload="getLocation();">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtHjFvnrLDWNltFhahTBQY8Yp_Yz0LEs8"></script>
+
+
+    <!-- side navigation bar code      onclick="openNav()" -->
+
+<form class="" method="post" id="distance_form">
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <label for="source">Source</label>
+      <input type="text" name="source" placeholder="enter source" id="source" />
+      <label for="destination">Destination</label>
+      <input type="text" name="destination" placeholder="enter destination" id="destination"/>
+      <label for="route">Mode of transportation</label>
+      <nav class="navbar navbar-default" >
+    <!--  <div class="container-fluid">
+        <ul class="nav navbar-nav ">
+          <li style="float:left"><a href="#" >drive</a></li>
+          <li style="float:left"><a href="#" >walk</a></li>
+          <li style="float:left"><a href="#" >bicycle</a></li>
+          <li style="float:left"><a href="#" >transit</a></li>
+        </ul>
+      </div> -->
+      <div class="form-inline">
+
+    <a class="btn btn-default" href="#">Drive</a>
+    <a class="btn btn-default" href="#">Walk</a>
+    <a class="btn btn-default" href="#">Transit</a>
+</div
+    </nav>
+    <input type="submit" name="SUBMIT" value="Submit" />
+    <div id="result">
+    <ul class="list-group">
+    	<li class="list-group-item d-flex justify-content-between align-items-center">Distance(km):</li>
+    	<li class="list-group-item d-flex justify-content-between align-items-center">Time(min):</li>
+    </ul>
+    </div>
+      <!--huhuhuhuhuhuhuhuhuuhuhuhuhuh-->
+      <button type="button" class="btn btn-default" aria-label="center Align">
+    <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>Set Alarm</i>
+  </button>
+    </div>
+</form>
+
+<!-- navigation bar -->
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">LocationAlarm <i class="glyphicon glyphicon-time"></i></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+     <li onclick="openNav()"><a href="#"><i class="glyphicon glyphicon-search"></i></a></li>
+     <li><a href="#"><i class="glyphicon glyphicon-heart"></i></a></li>
+     <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i></a></li>
+     <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
+   </ul>
+ </div>
+</nav>
+
+     <!-- map element use style:margin and padding rather than 'container class of bootstrap'-->
+
+  <div class="col-sm-10" id="map" >
+  <br>
+  </div>
+
+
+<!--scripting css sort of -->
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("map").style.marginLeft = "250px";
+    }
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("map").style.marginLeft= "0";
+}
+</script>
+<!-- ERROR: THE FUCKING FUCKING FUCKING FUCK *_* -->
+<script>
+
+google.maps.event.addDomListener(function(){
+
+    var source= new google.maps.places.Autocomplete(document.getElementById('source'));
+    var destination = new google.maps.places.Autocomplete(document.getElementById('destination'));
+
+    /*changes made to source or destination addresses */
+    google.maps.event.addDomListener(source,'place_changed',function(){
+      var changed_source = source.getPlace();
+      var destination = destination.formatted_address();
+      $('#source').val(changed_source);
+    });
+    google.maps.event.addDomListener(destination,'place_changed',function(){
+      var source = source.formatted_address();
+      var changed_destination = destination.getPlace();
+      $('#destination').val(changed_destination);
+    });
+}
+
+  /*calculate distance */
+function calculateDistance() {
+    var origin = $('#source').val();
+    var destination = $('#destination').val();
+
+/*local storage* for several suggestions, completing the words*/
+
+if(localStorage.getItem('savedLocations')==null){
+
+  var savedLocations = [] ;
+  savedLocations.push(origin);
+  savedLocations.push(destination);
+  localStorage.setItem('savedLocations',JSON.stringify(savedLocations));
+}
+else {
+  var savedLocations = JSON.parse(localStorage.getItem('savedLocations'));
+  savedLocations.push(origin);
+  savedLocations.push(destination);
+  localStorage.setItem('savedLocations',JSON.stringify(savedLocations));
+}
+
+
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix(
+          {
+              origins: [origin],
+              destinations: [destination],
+              travelMode: google.maps.TravelMode.DRIVING,
+              //unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+              unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+              avoidHighways: false,
+              avoidTolls: false
+          }, callback);
+  }
+
+  // get distance results
+  function callback(response, status) {
+      if (status != google.maps.DistanceMatrixStatus.OK) {
+          $('#result').html(err);
+      } else {
+          var origin = response.originAddresses[0];
+          var destination = response.destinationAddresses[0];
+          if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+              $('#result').html("Better get on a plane. There are no roads between "  + origin + " and " + destination);
+          } else {
+              var distance = response.rows[0].elements[0].distance;
+              var duration = response.rows[0].elements[0].duration;
+              console.log(response.rows[0].elements[0].distance);
+              var distance_in_kilo = distance.value / 1000; // the kilom
+              var duration_value = duration.value;
+              $('#in_kilo').text(distance_in_kilo.toFixed(2));
+              $('#duration_value').text(duration_value);
+          }
+      }
+  }
+  // print results on submit the form
+  $('#distance_form').submit(function(e){
+      e.preventDefault();
+      calculateDistance();
+  });
+
+
+
+</script>
+
+<footer style="text-align:center">@LocationAlarm</footer>
+
+  </body>
+</html>
