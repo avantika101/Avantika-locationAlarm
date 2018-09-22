@@ -1,0 +1,15 @@
+{% extends 'accounts/base.html' %}
+
+    {% block content %}
+    <form class="site-form" action={% url 'accounts:signup' %} method="post">
+    {% csrf_token %}
+
+
+    <div align="center" class="form-group">
+      {{form}}
+    </div>
+
+    <input class="btn btn-primary center-block btn-lg" type="submit" name="submit" value="signup" size="30px">
+    </form>
+
+      {% endblock %}

@@ -1,0 +1,17 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+<h1> login</h1>
+<form action="{% url 'accounts:login' %}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    {% if request.GET.next %}
+      <input type="hidden" name="next" value="{{request.GET.next}}" />
+    {% endif %}
+    <!--{{form.as_p}}<br> -->
+    <input type="submit" value="login">
+</form>
+    </body>
+</html>

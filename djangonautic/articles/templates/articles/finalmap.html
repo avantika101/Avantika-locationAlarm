@@ -1,0 +1,42 @@
+{% extends 'articles/base.html' %}
+ {% block content %}
+    yay! final map is here! *_*
+
+    <!--displaying the success message -->
+    {% if messages %}
+      {% for variable in messages %}
+      <div class="alert alert-success" style="text-align:center">
+        <strong>Success!</strong>{{variable}}
+      </div>
+      {% endfor %}
+    {% endif %}
+<!-- hiding the message after some time -->
+    <script type="text/javascript">
+    $(".alert").delay(4000).slideUp(200, function() {
+  $(this).alert('close');
+    });
+    </script>
+
+    <!-- enter the values -->
+
+<div class="container">
+<div class="row">
+
+<div class="col-md-6">
+<form id="form" method="post" action="{% url 'articles:finalmap' %}">
+  {% csrf_token %}
+<div class="form-group"><label>Origin: </label> <input class="form-control" id="source" placeholder="Enter a location" name="source" /></div>
+
+<div class="form-group"><label>Destination: </label> <input class="form-control" id="destination" placeholder="Enter a location" name="destination" /></div>
+<input class="btn btn-primary" type="submit" name="submit" value="calculate" />
+<input class="btn btn-primary" type="submit" name="submit" value="save" />
+</form></br>
+<form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" name="">LogOut</button>
+</form>
+
+</div>
+</div>
+</div>
+{% endblock%}

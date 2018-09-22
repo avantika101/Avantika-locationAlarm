@@ -1,0 +1,38 @@
+{% extends 'articles/base.html' %}
+ {% block content %}
+ <!--displaying the success message -->
+    {% if messages %}
+      {% for variable in messages %}
+      <div class="alert alert-success" style="text-align:center">
+        <strong>Success!</strong>{{variable}}
+      </div>
+      {% endfor %}
+    {% endif %}
+<!-- hiding the message after some time -->
+    <script type="text/javascript">
+    $(".alert").delay(4000).slideUp(200, function() {
+  $(this).alert('close');
+    });
+    </script>
+ contact add form:
+ <form class="" action="{% url 'articles:contacts' %}" method="post">
+   {% csrf_token %}
+   <input type="text" name="number" value="number" placeholder="enter the number" />
+   <button type="submit" name="submit" value="save">Add Number</button>
+ </form>
+ Added Numbers:
+
+ <table style="width:100%">
+   <tr>
+     <th>numbers</th>
+     <th>delete</th>
+   </tr>
+   {% for contacts in contacts %}
+   <tr>
+       <td>{{contacts.number}}</td>
+       <td><a href="{% url 'articles:delete_contact_view' contacts.id %}">delete</a></td>
+   </tr>
+      {% endfor %}
+ </table>
+
+ {% endblock%}

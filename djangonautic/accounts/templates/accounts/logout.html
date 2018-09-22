@@ -1,0 +1,11 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<h1> logout</h1>
+<form action="./login" method="POST">
+    {% csrf_token %}
+    {{form}}<br>
+    <input type="submit" value="login">
+</form>
+
+  {% endblock %}

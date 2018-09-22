@@ -1,0 +1,50 @@
+
+
+{% extends 'accounts/base.html' %}
+
+ {% block content %}
+
+    <nav class="navbar navbar-inverse">
+ <div class="container-fluid">
+   <div class="navbar-header">
+     <a class="navbar-brand" href="#">LocationAlarm</a>
+   </div>
+   <ul class="nav navbar-nav">
+     <li class="active"><a href="#">Home</a></li>
+   </ul>
+   <ul class="nav navbar-nav navbar-right">
+     <li><a href="{% url 'articles:settings' %}"><span class=""></span>settings</a></li>
+     <li><a href="{% url 'articles:finalmap' %}"><span class=""></span>map</a></li>
+     <!-- only buttons do POST request and for logging out we need a post request-->
+     <!-- hence an anchor tag will not work-->
+   </ul>
+ </div>
+</nav>
+
+<h2 style="text-align:center">Welcome,{{request.user}}!</h2>
+<!--displaying the success message -->
+   {% if messages %}
+     {% for variable in messages %}
+     <div class="alert alert-success" style="text-align:center">
+       <strong>Success!</strong>{{variable}}
+     </div>
+     {% endfor %}
+   {% endif %}
+<!-- hiding the message after some time -->
+   <script type="text/javascript">
+   $(".alert").delay(4000).slideUp(200, function() {
+ $(this).alert('close');
+   });
+   </script>
+
+<div class="" style="text-align:center">
+  PUT A SIMPLE MAP
+  USER CAN SEE THE DISTANCE AND TIME DURATION TO THE DESTIATION
+  BUT CANNOT SET AN ALARM
+  <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" name="">LogOut</button>
+  </form>
+</div>
+
+ {% endblock %}

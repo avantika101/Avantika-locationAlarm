@@ -1,0 +1,24 @@
+{% extends 'articles/base.html' %}
+ {% block content %}
+<div class="" style="text-align:center">Saved Locations</div>
+
+<table  style="width:100%">
+  <tr>
+    <th>source</th>
+    <th>destination</th>
+    <th>go to?</th>
+    <th>delete</th>
+  </tr>
+{% for locations in locations %}
+  <tr>
+    <td>{{locations.source}}</td>
+    <td>{{locations.destination}}</td>
+    <td>go to</td>
+    <td><a href="{% url 'articles:delete_location_view' locations.id %}">delete</a></td>
+  </tr>
+{% endfor %}
+</table>
+
+ {% endblock %}
+
+ <!-- <div>Source:{{object.source}} destination:{{object.destination}}</div>
