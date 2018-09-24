@@ -10,13 +10,9 @@
   <a href="#">Reset Alarm</a></i></br>
   <a href="{% url 'articles:contacts' %}">Change Contacts</a></br>
 </div>
-<input class="btn btn-primary" type="submit" name="submit" value="cancel" />
-<input class="btn btn-primary" type="submit" name="submit" value="save">
+
 </form>
-<form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
-    {% csrf_token %}
-      <button type="submit" name="">LogOut</button>
-</form>
+
 
 
 {% endblock %}

@@ -34,21 +34,21 @@ def map(request):
 
 @login_required(login_url="/accounts/login/")
 def settings_view(request):
-    if request.method =='POST':
+    #if request.method =='POST':
 
         #change saved SavedLocations
         #change buzzer volume(if possible)
         #change user contacts
         #logout
 
-        if request.POST.get("submit")=='cancel':
-            return render(request,'articles/finalmap.html')
-        elif request.POST.get("submit")=='save':
-            return HttpResponse("settings changed!")
+        #if request.POST.get("submit")=='cancel':
+        #    return render(request,'articles/finalmap.html')
+        #elif request.POST.get("submit")=='save':
+        #    return HttpResponse("settings changed!")
             #get all the values and save them one by one in the form instance
             #check out deleting the to do list
 
-    else:
+    #else:
         return render(request,'articles/settings.html')
 
 def locations_view(request):
@@ -69,6 +69,7 @@ def contacts_view(request):
         print(objects)
         return render(request,'articles/contacts.html',{'contacts':objects},{'message':message})
     else:
+        form=forms.UserContacts()
         objects=UserContacts.objects.filter(username=request.user)
         print(objects)
         return render(request,'articles/contacts.html',{'contacts':objects})

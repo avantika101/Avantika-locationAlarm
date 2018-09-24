@@ -1,7 +1,4 @@
-
-
 {% extends 'accounts/base.html' %}
-
  {% block content %}
 
     <nav class="navbar navbar-inverse">
@@ -10,7 +7,7 @@
      <a class="navbar-brand" href="#">LocationAlarm</a>
    </div>
    <ul class="nav navbar-nav">
-     <li class="active"><a href="#">Home</a></li>
+     <li><a href="{% url 'accounts:home' %}">Home</a></li>
    </ul>
    <ul class="nav navbar-nav navbar-right">
      <li><a href="{% url 'articles:settings' %}"><span class=""></span>settings</a></li>
@@ -38,9 +35,7 @@
    </script>
 
 <div class="" style="text-align:center">
-  PUT A SIMPLE MAP
-  USER CAN SEE THE DISTANCE AND TIME DURATION TO THE DESTIATION
-  BUT CANNOT SET AN ALARM
+
   <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
     {% csrf_token %}
     <button type="submit" name="">LogOut</button>

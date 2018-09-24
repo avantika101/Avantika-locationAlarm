@@ -3,8 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-# Create your models here.
-
+#from phonenumber_field.modelfields import PhoneNumberField
 
 class SavedLocations(models.Model):
 
@@ -19,6 +18,6 @@ class SavedLocations(models.Model):
 class UserContacts(models.Model):
 
     username = models.ForeignKey(User,default=None)
-    number = models.CharField(max_length=12,null=True,default='none')
+    number = models.CharField(max_length=12,default='None',blank=True) # validators should be a list
     def __unicode__(self):
         return self.number

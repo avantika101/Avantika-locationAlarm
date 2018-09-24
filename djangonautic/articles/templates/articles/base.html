@@ -8,7 +8,30 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
+
+    <nav class="navbar navbar-inverse">
+ <div class="container-fluid">
+   <div class="navbar-header">
+     <a class="navbar-brand" href="#">LocationAlarm</a>
+   </div>
+   <ul class="nav navbar-nav">
+     <li class="active"><a href="{% url 'accounts:userhome' %}">Home</a></li>
+   </ul>
+   <ul class="nav navbar-nav navbar-right">
+     <li><a href="{% url 'articles:settings' %}"><span class=""></span>settings</a></li>
+     <li><a href="{% url 'articles:finalmap' %}"><span class=""></span>map</a></li>
+     <!-- only buttons do POST request and for logging out we need a post request-->
+     <!-- hence an anchor tag will not work-->
+   </ul>
+ </div>
+</nav>
+
     {% block content %}
     {% endblock%}
+
+    <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit" name="">LogOut</button>
+    </form>
   </body>
 </html>
