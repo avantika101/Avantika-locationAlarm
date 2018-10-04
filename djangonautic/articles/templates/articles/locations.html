@@ -1,6 +1,20 @@
 {% extends 'articles/base.html' %}
+<head>
+  {% block head %}
+  <title>Locations</title>
+  {% endblock %}
+</head>
+
  {% block content %}
 <div class="" style="text-align:center">Saved Locations</div>
+
+{% if messages %}
+  {% for variable in messages %}
+  <div class="alert alert-success" style="text-align:center">
+    <strong>Success!</strong>{{variable}}
+  </div>
+  {% endfor %}
+{% endif %}
 
 <table  style="width:100%">
   <tr>

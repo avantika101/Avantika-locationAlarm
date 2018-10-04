@@ -18,7 +18,7 @@ def signup_view(request):
             message = messages.success(request,('account saved!'))
             return redirect('accounts:userhome')
     else:
-        form=RegistraForm()
+        form=RegistrationForm()
         return render(request,'accounts/signup.html',{'form':form})
 
 def login_view(request):

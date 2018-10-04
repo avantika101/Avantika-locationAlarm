@@ -1,6 +1,11 @@
 {% extends 'articles/base.html' %}
 {% load static from staticfiles %}
 <!-- loading the static module for keyword 'static' -->
+<head>
+  {% block head %}
+  <title>Settings</title>
+  {% endblock %}
+</head>
 {% block content %}
 #submit the changes made and store them
 <form class="" action="{% url 'articles:finalmap' %}" method="post">

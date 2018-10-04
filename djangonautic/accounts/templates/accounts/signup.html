@@ -1,4 +1,9 @@
 {% extends 'accounts/base.html' %}
+<head>
+  {% block head %}
+    <title>Signup Page</title>
+  {% endblock %}
+</head>
 
     {% block content %}
     <form class="site-form" action={% url 'accounts:signup' %} method="post">

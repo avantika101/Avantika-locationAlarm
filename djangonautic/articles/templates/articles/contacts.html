@@ -1,4 +1,11 @@
 {% extends 'articles/base.html' %}
+
+<head>
+  {% block head %}
+  <title>Contacts</title>
+  {% endblock %}
+</head>
+
  {% block content %}
  <!--displaying the success message -->
     {% if messages %}
@@ -18,13 +25,13 @@
  <form class="" action="{% url 'articles:contacts' %}" method="post">
    {% csrf_token %}
   <input type="text" name="number" value="number" />
-   <button type="submit" name="submit" value="save">Add Number</button>
+   <button type="submit" name="submit" value="save">Add Email</button>
  </form>
- Added Numbers:
+ Added Emails:
 
  <table style="width:100%">
    <tr>
-     <th>numbers</th>
+     <th>Email</th>
      <th>delete</th>
    </tr>
    {% for contacts in contacts %}
