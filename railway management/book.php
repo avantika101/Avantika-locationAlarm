@@ -105,8 +105,6 @@ if(isset($_POST['book_ticket'])){
         </select>
         <button type="submit" name="book_ticket">book</button>
       </form><br>
-      <a href="search_for_train.php">go back</a>
-      <a href="#">clear fields</a><br>
       <a href="user_homepage.php">homepage</a><br>
       <a href="logout.php">logout</a><br>
       <?php

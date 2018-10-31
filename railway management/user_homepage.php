@@ -1,3 +1,13 @@
+<?php
+  ob_start();
+  include('login.php');
+  ob_end_clean();
+   ?>
+<?php
+  ob_start();
+  include('signup.php');
+  ob_end_clean();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -18,10 +28,51 @@
 
       <?php if(isset($_SESSION['first_name'])): ?>
         <p>Welcome, <strong><?php echo $_SESSION['first_name'] ;?></strong></p>
-        <a href="search_for_train.php">search for train</a><br>
-        <a href="enquiry_for_PNR.php">enquiry for PNR</a><br>
+        <!-- search for train code -->
+        Search
+        <form class="" action="search_for_train.php" method="post" id="search_for_train">
+          <table>
+            <tr>
+              <td>from:</td>
+              <td><select class="" name="from" id="from" required>
+                <option value="Kanpur(KNP)">Kanpur(KNP)</option>
+                <option value="Patna(PTA)">Patna(PTA)</option>
+                <option value="Bengaluru(BNG)">Bengaluru(BNG)</option>
+                <option value="Bhopal(BHO)">Bhopal(BHO)</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>to:</td>
+              <td><select class="" name="to" id="to" required>
+                <option value="Kanpur(KNP)">Kanpur(KNP)</option>
+                <option value="Patna(PTA)">Patna(PTA)</option>
+                <option value="Bengaluru(BNG)">Bengaluru(BNG)</option>
+                <option value="Bhopal(BHO)">Bhopal(BHO)</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>category:</td>
+              <td><select class="" name="type" id="type" required>
+                <option value="AC_fare">AC_fare</option>
+                <option value="g_fare">g_fare</option>
+              </select></td>
+            </tr>
+          </table>
+          <button type="submit" name="search">direct search</button>
+          <button type="submit" name="indirect_search">search</button>
+        </form>
+
+        <!-- enquiry -->
+        <br>
+        Make enquiry
+        <form class="" action="enquiry_for_PNR.php" method="post">
+          <label for="PNR">PNR</label>
+          <input type="text" name="PNR" value=""><br>
+          <button type="submit" name="check">check</button>
+        </form> <br>
         <a href="cancel_tickets.php">cancel tickets</a><br>
-        <a href="#">logout</a><br>
+        <a href="logout.php">logout</a><br>
+        Already know which train you want to travel from?<a href="book.php">book tickets here</a>
       <?php endif ?>
   </body>
 </html>
