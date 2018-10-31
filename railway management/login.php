@@ -1,5 +1,5 @@
 <?php
-  //session_start();
+  session_start();
   error_reporting(E_ERROR | E_PARSE);
   $db=mysqli_connect("localhost","avantika","avantika","db1");
   $email=mysqli_real_escape_string($db,$_POST['email']);
@@ -12,10 +12,10 @@
     $row=mysqli_fetch_array($result);
     if(($row['email']==$email)&& ($row['password']==$password)){
       //echo "login successful! welcome,",$row['first_name'];
-      //header("Location:user_homepage.php"); //redirecting to user home page NOT WORKING
       $_SESSION['first_name']=$row['first_name'];
       $_SESSION['u_id']=$row['u_id'];
-      echo "login successful! welcome,".$_SESSION['first_name'];
+      $_SESSION['success']="you've been logged in!";
+      header('location:user_homepage.php'); //redirecting to user home page NOT WORKING
       //echo "<script> window.location.assign('user_homepage.php'); </script>"; //REDIRECTION WORKING
       exit();
     }else{
@@ -31,8 +31,9 @@
     <title>Login</title>
   </head>
   <body>
+
     <form class="" action="login.php" method="post">
-      <?php session_start(); ?>
+
       <table>
         <tr>
           <td>email:</td>

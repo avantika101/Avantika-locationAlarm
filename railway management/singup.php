@@ -1,4 +1,5 @@
 <?php
+  session_start();
   error_reporting(E_ERROR | E_PARSE);
   $db=mysqli_connect("localhost","avantika","avantika","db1"); #port number
   if(!$db){
@@ -17,19 +18,20 @@
     if($password == $retype_password){
       #$password=md5($password);//encrypting the password
       $sql="INSERT INTO user (first_name,last_name,email,gender,age,password) VALUES('$first_name','$last_name','$email','$gender','$age','$password')";
-    //session_start();
       if(mysqli_query($db, $sql)){
-        //echo "Records added successfully.";
-        $_SESSION['first_name']=$row['first_name'];
-        $_SESSION['u_id']=$row['u_id'];
-        echo "signup successful! welcome,".$_SESSION['first_name'];
-        echo "<script> window.location.assign('user_homepage.php'); </script>";
+        $row=mysqli_query($db,"SELECT * from user where first_name='$first_name' and last_name='$last_name'
+              and gender='$gender' and age='$age' and email='$email'");
+        if($row1=mysqli_fetch_assoc($row)){
+          $_SESSION['first_name']=$first_name;
+          $_SESSION['u_id']=$row1['u_id'];
+          $_SESSION['success']="your account has been created!";
+          header('location:user_homepage.php');
+        }
+         //redirecting to user home page
+        //echo "<script> window.location.assign('user_homepage.php'); </script>";
     } else{
         printf("ERROR: Could not able to execute $sql. " . mysqli_error($db));
-    };
-      //$_SESSION['message']="you are now logged in";
-      //$_SESSION['first_name']=$first_name;
-      //header("location:user_homepage.php"); //redirecting to user home page
+    }
     }
     else{
       $_SESSION['message']="the passwords do not match";
@@ -47,7 +49,6 @@
     Register Here!
 
     <form class="" action="signup.php" method="POST">
-      <?php session_start(); ?>
       <table>
         <tr>
           <td>first name:</td>

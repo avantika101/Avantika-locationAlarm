@@ -1,4 +1,11 @@
 <?php
+error_reporting(E_ALL);
+ob_start();
+include('user_homepage.php');
+include('login.php');
+include('signup.php');
+ob_end_clean();
+
   error_reporting(E_ALL);
   $db=mysqli_connect("localhost","avantika","avantika","db1"); #port number
 
@@ -16,6 +23,7 @@
         echo "0 results";
       }else{
         while($row=mysqli_fetch_assoc($result1)){
+          //$i=$i+1;
           $train=$row['t_no'];
           $sql2=""; $fare="";
           if($type=='AC_fare'){
@@ -27,31 +35,18 @@
             $row1=mysqli_fetch_assoc($sql2);
             $fare=$row1['g_fare'];
           }
-
-          echo "<br>train_no:".$row['t_no']." start time:".$row['start_t']." end time:".$row['arrival_time']." ";
-          echo "fare:".$fare."<br>";
+          echo "<br><span>train_no:".$row['t_no']." start time:".$row['start_t']." end time:".$row['arrival_time']." ";
+          echo "fare:".$fare."</span><br>";
+          //echo "<input type='button' onclick='book('"."$i".".');' value='book ticket'/>";
       }
     }
-//learn nested queries first QUERY 2 NOT CONSIDERING CURRENTLY
-/*    $sql2="SELECT S.t_no,T.arrival_time from station S
-          where t_no=(select T.t_no from station T where T.s_name='$from') and S.s_name='$to'";
-    $result2=mysqli_query($db,$sql2);
-    if(!$result2 || mysqli_num_rows($result2)==0){
-      //output data of each row
-        echo "0 results";
-      }else{
-        while($row=mysqli_fetch_assoc($result2)){
-          echo "<br>train_no:".$row['t_no']."<br>start time:".$row['arrival_time']."<br>";
-      }
-    } */
     }
-
     if(isset($_POST['indirect_search'])){
       $from=$_POST['from'];
       $to=$_POST['to'];
       $type=$_POST['type'];
 
-      $sql1="SELECT S.t_no,T.arrival_time from station S
+      $sql1="SELECT S.t_no,S.arrival_time from station S
             where t_no=(select T.t_no from station T where T.s_name='$from') and S.s_name='$to'";
       $result1=mysqli_query($db,$sql1); //=$db->query($sql); gives an object
 
@@ -60,8 +55,8 @@
           echo "0 results";
         }else{
           while($row=mysqli_fetch_assoc($result1)){
-            $train=$row['t_no'];
-            echo "".$train."";
+            //$i=$i+1;
+            $train[$i]=$row['t_no'];
             $sql2=""; $fare="";
             if($type=='AC_fare'){
               $sql2=mysqli_query($db,"SELECT AC_fare from train_status where t_no='$train'");
@@ -75,10 +70,10 @@
 
             echo "<br>train_no:".$row['t_no']." start time:".$row['start_t']." end time:".$row['arrival_time']." ";
             echo "fare:".$fare."<br>";
+            //echo "<input type='button' onclick='book(\"$i\")'; value='book'/>";
         }
       }
     }
-
 
  ?>
 <!DOCTYPE html>
@@ -89,7 +84,7 @@
   </head>
   <body>
     plan your journey <br>
-    <form class="" action="search_for_train.php" method="post">
+    <form class="" action="search_for_train.php" method="post" id="search_for_train">
       <table>
         <tr>
           <td>from:</td>
@@ -120,14 +115,10 @@
       <button type="submit" name="search">direct search</button>
       <button type="submit" name="indirect_search">indirect search</button>
     </form>
-
-    <!--<label for="to">to</label>
-    <input type="text" name="to" value=""><br>
-    <label for="date_of_travel">date of travel</label>
-    <input type="text" name="date_of_travel" value=""><br> -->
-
+    <a href="book.php">want to book?</a><br>
     <a href="#">clear fields</a><br>
     <a href="user_homepage.php">go back</a><br>
     <a href="#">logout</a><br>
+
   </body>
 </html>
