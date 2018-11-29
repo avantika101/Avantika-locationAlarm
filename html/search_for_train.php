@@ -8,14 +8,14 @@
     <center>plan your journey<center><br>
     <!-- changed -->
     <?php
-    error_reporting(E_ALL);
+    error_reporting(E_ERROR | E_PARSE);
     ob_start();
     include('user_homepage.php');
     include('login.php');
     include('signup.php');
     ob_end_clean();
 
-      error_reporting(E_ALL);
+      error_reporting(E_ERROR | E_PARSE);
       $db=mysqli_connect("localhost","avantika","avantika","db1"); #port number
 
       if(isset($_POST['search'])){
